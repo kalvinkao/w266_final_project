@@ -1,0 +1,103 @@
+W266-e0765770caab.json allows access to your cloud resources, so store it securely.
+
+set GOOGLE_APPLICATION_CREDENTIALS=[PATH]
+
+TRAIN_DATA=gs://$BUCKET_NAME/data/adult.data.csv
+EVAL_DATA=gs://$BUCKET_NAME/data/adult.test.csv
+
+gcloud ml-engine jobs submit training $JOB_NAME \
+    --job-dir $OUTPUT_PATH \
+    --runtime-version 1.8 \
+    --module-name trainer.task \
+    --package-path trainer/ \
+    --region $REGION \
+    -- \
+    --train-files $TRAIN_DATA \
+    --eval-files $EVAL_DATA \
+    --train-steps 1000 \
+    --eval-steps 100 \
+    --verbosity DEBUG
+
+
+JOB_NAME=simple_single_1
+OUTPUT_PATH=gs://w266_final_project_kk/$JOB_NAME
+TRAIN_DATA=gs://w266_final_project_kk/data/review.csv
+EVAL_DATA=gs://w266_final_project_kk/data/review.csv
+PACKAGE_PATH=/home/kalvin_kao/artificial_hotel_reviews/a4/w266_common
+REGION=us-west1
+
+
+JOB_NAME=simple_single_1
+OUTPUT_PATH=w266_final_project_kk/$JOB_NAME
+TRAIN_DATA=w266_final_project_kk/data/review.csv
+EVAL_DATA=w266_final_project_kk/data/review.csv
+PACKAGE_PATH=gs://w266_final_project_kk/
+REGION=us-west1
+
+gcloud ml-engine jobs submit training $JOB_NAME \
+    --job-dir $OUTPUT_PATH \
+    --runtime-version 1.8 \
+    --module-name baselinernn.py \
+    --package-path $PACKAGE_PATH
+    --region $REGION \
+    -- \
+    --train-files $TRAIN_DATA \
+    --eval-files $EVAL_DATA \
+    --train-steps 1000 \
+    --eval-steps 100 \
+    --verbosity DEBUG
+
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $OUTPUT_PATH --runtime-version 1.8 --module-name baselinernn.py --package-path $PACKAGE_PATH --region $REGION --verbosity debug
+
+JOB_NAME=simple_single_7
+OUTPUT_PATH=gs://w266_final_project_kk/$JOB_NAME
+TRAIN_DATA=gs://w266_final_project_kk/data/review.csv
+EVAL_DATA=gs://w266_final_project_kk/data/review.csv
+PACKAGE_PATH=/home/kalvin_kao/artificial_hotel_reviews/a4/w266_common
+REGION=us-central1
+
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $OUTPUT_PATH --runtime-version 1.8 --module-name trainer.task --package-path trainer/ --region $REGION --verbosity debug
+
+gcloud ml-engine local train --module-name trainer.task --package-path trainer/ --job-dir output --train-files $TRAIN_DATA --eval-files $EVAL_DATA --train-steps 1000 --eval-steps 100
+
+add baseline.rnn to python modules?
+
+TRAINER_PACKAGE_PATH="/path/to/your/application/sources"
+MAIN_TRAINER_MODULE="trainer.task"
+PACKAGE_STAGING_PATH="gs://your/chosen/staging/path"
+
+now=$(date +"%Y%m%d_%H%M%S")
+JOB_NAME="your_name_$now"
+JOB_DIR="gs://w266_final_project_kk/$JOB_NAME"
+REGION="us-east1"
+
+gcloud ml-engine jobs submit training $JOB_NAME \
+    --staging-bucket $PACKAGE_STAGING_PATH \
+    --job-dir $JOB_DIR  \
+    --package-path $TRAINER_PACKAGE_PATH \
+    --module-name $MAIN_TRAINER_MODULE \
+    --region $REGION \
+    -- \
+    --user_first_arg=first_arg_value \
+    --user_second_arg=second_arg_value
+
+
+PACKAGE_STAGING_PATH="gs://w266_final_project_kk/$JOB_NAME/staging"
+now=$(date +"%Y%m%d_%H%M%S")
+
+JOB_NAME="baseline_test_complex_model_l_03"
+JOB_DIR="gs://w266_final_project_kk/$JOB_NAME"
+TRAINER_PACKAGE_PATH="/home/kalvin_kao/artificial_hotel_reviews/mlengine2/trainer"
+MAIN_TRAINER_MODULE="trainer.task"
+REGION="us-central1"
+
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR  --package-path $TRAINER_PACKAGE_PATH --module-name $MAIN_TRAINER_MODULE --region $REGION --verbosity debug \
+
+gcloud ml-engine jobs submit training $JOB_NAME --scale-tier basic_gpu --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.1.tar.gz --region $REGION --verbosity debug \
+
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.1.1.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug \
+
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.1.2.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug \
+    -- \
+    --user_first_arg=first_arg_value \
+    --user_second_arg=second_arg_value
