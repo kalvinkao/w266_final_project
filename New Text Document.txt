@@ -85,7 +85,7 @@ gcloud ml-engine jobs submit training $JOB_NAME \
 PACKAGE_STAGING_PATH="gs://w266_final_project_kk/$JOB_NAME/staging"
 now=$(date +"%Y%m%d_%H%M%S")
 
-JOB_NAME="baseline_attack_single_complex_model_l_02"
+JOB_NAME="baseline_attack_single_complex_model_l_03"
 JOB_DIR="gs://w266_final_project_kk/$JOB_NAME"
 TRAINER_PACKAGE_PATH="/home/kalvin_kao/artificial_hotel_reviews/models/baseline_attack/trainer"
 MAIN_TRAINER_MODULE="trainer.task"
