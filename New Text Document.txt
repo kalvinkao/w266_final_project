@@ -101,7 +101,7 @@ gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name
 
 gcloud ml-engine jobs submit training $JOB_NAME --scale-tier basic_gpu --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.2.0.tar.gz --region $REGION --runtime-version 1.8 --verbosity debug \
 
-gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.2.1.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug \
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.2.2.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug \
     -- \
     --user_first_arg=first_arg_value \
     --user_second_arg=second_arg_value
