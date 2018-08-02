@@ -105,3 +105,12 @@ gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name
     -- \
     --user_first_arg=first_arg_value \
     --user_second_arg=second_arg_value
+
+
+JOB_NAME="baseline_defense_single_complex_model_l_practice_01"
+JOB_DIR="gs://w266_final_project_kk/$JOB_NAME"
+TRAINER_PACKAGE_PATH="/home/kalvin_kao/artificial_hotel_reviews/models/baseline_defense/trainer"
+MAIN_TRAINER_MODULE="trainer.task"
+REGION="us-central1"
+
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-1.0.0.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug
