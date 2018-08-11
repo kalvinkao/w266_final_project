@@ -117,20 +117,20 @@ gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name
 
 
 
-JOB_NAME="baseline_attack_single_complex_model_l_11"
+JOB_NAME="baseline_attack_single_complex_model_l_15"
 JOB_DIR="gs://w266_final_project_kk/$JOB_NAME"
 TRAINER_PACKAGE_PATH="/home/kalvin_kao/artificial_hotel_reviews/models/baseline_attack/trainer"
 MAIN_TRAINER_MODULE="trainer.task"
 REGION="us-central1"
 
-gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.3.1.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-0.3.8.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug
 
 
 
-JOB_NAME="baseline_defense_prediction_02_single_complex_model_l"
+JOB_NAME="baseline_defense_prediction_05_single_complex_model_l"
 JOB_DIR="gs://w266_final_project_kk/$JOB_NAME"
 TRAINER_PACKAGE_PATH="/home/kalvin_kao/artificial_hotel_reviews/models/baseline_defense/trainer"
 MAIN_TRAINER_MODULE="trainer.task"
 REGION="us-central1"
 
-gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-1.1.2.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug
+gcloud ml-engine jobs submit training $JOB_NAME --job-dir $JOB_DIR --module-name $MAIN_TRAINER_MODULE --packages trainer-1.1.5.tar.gz --region $REGION --runtime-version 1.8 --config config.yaml --verbosity debug
